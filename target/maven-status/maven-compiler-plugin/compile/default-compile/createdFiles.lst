@@ -1,5 +1,6 @@
 com\mycompany\projetojdbc\entities\Categoria.class
 com\mycompany\projetojdbc\entities\Filme.class
+com\mycompany\projetojdbc\dao\CategoriaDAO.class
 com\mycompany\projetojdbc\TestConexao.class
 com\mycompany\projetojdbc\ProjetoJdbc.class
 com\mycompany\projetojdbc\ConexaoDB.class
