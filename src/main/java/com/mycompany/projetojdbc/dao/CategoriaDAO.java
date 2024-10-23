@@ -35,5 +35,18 @@ public class CategoriaDAO {
 
         }
     }
+    
+    public Categoria buscarCategotiaPorId(int id) throws SQLException {
+        String sql = "SELECT * FROM Categoria WHERE id = ?";
+        try (Connection conn = ConexaoDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Categoria(rs.getInt("id"), rs.getString("nome"));
+            }
+        }
+        return null;
+
         
+}
 }
