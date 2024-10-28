@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class TestConexao {
     public static void main(String[] args) {
-        Connection conexao = null;
+        Connection conexao;
         try {
             // Obtém a conexão com o banco de dados
             conexao = ConexaoDB.getConnection();
