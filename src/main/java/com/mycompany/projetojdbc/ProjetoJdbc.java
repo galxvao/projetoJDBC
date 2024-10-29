@@ -5,14 +5,12 @@
 package com.mycompany.projetojdbc;
 
 import com.mycompany.projetojdbc.dao.CategoriaDAO;
+import com.mycompany.projetojdbc.dao.CleanDataTableDAO;
 import com.mycompany.projetojdbc.entities.Categoria;
 import java.sql.SQLException;
 import java.util.List;
 
-
-
 /**
- *
  * @author davi_galvao
  */
 public class ProjetoJdbc {
@@ -20,6 +18,12 @@ public class ProjetoJdbc {
     public static void main(String[] args) {
         try {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
+            
+            CleanDataTableDAO cleanDB = new CleanDataTableDAO();
+            cleanDB.deleteTabelaFilme();
+            cleanDB.deleteTabelaCategoria();
+            cleanDB.setAutoIncrementeOneTabelaCategoria();
+            cleanDB.setAutoIncrementeOneTabelaFilme();
             
             //Criar algumas categorias
             Categoria cat1 = new Categoria(0, "Ação");
@@ -35,7 +39,7 @@ public class ProjetoJdbc {
             categoriaDAO.inserirCategoria(cat4);
             
             
-           Categoria catBuscada = categoriaDAO.buscarCategoriaPorId(2);
+           Categoria catBuscada = categoriaDAO.buscarCategoriaPorId(3);
      
            System.out.println("Id: " + catBuscada.getId() + "\nNome: " + catBuscada.getNome());
            
