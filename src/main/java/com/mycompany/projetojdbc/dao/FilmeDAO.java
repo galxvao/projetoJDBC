@@ -16,23 +16,37 @@ import java.sql.Statement;
  *
  * @author davi_galvao
  */
+
+//Create 
+
 public class FilmeDAO {
     public void inserirFilme(Filme filme) throws SQLException {
-    String sql = "INSERT INTO Filme (nome) VALUES (?)";
+    String sql = "INSERT INTO Filme (titulo, ano, diretor, categoriaId) VALUES (?)";
     
     try (Connection conn = ConexaoDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
         stmt.setString(1, filme.getTitulo());
+        stmt.setInt(1, filme.getId());
+        stmt.setInt(1, filme.getAno());
+        stmt.setString(1,filme.getDiretor());
+        stmt.setInt(1,filme.getCategoriaId());
         stmt.executeUpdate();
-
+        
+        
         // Capturar o ID gerado automaticamente
         try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
             if (generatedKeys.next()) {
                 filme.setId(generatedKeys.getInt(1)); // Definir o ID no objeto Categoria
+               filme.setTitulo(filme.getTitulo());
+               filme.setAno(filme.getAno());
+               filme.setDiretor(filme.getDiretor());
+               filme.setCategoriaId(filme.getCategoriaId());
             } else {
                 throw new SQLException("Falha ao inserir filme, nenhum ID gerado.");
             }
         }
     }
 }
+    
+    
     
 }
