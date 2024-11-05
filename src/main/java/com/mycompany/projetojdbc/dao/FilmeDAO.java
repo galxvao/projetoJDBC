@@ -5,12 +5,15 @@
 package com.mycompany.projetojdbc.dao;
 
 import com.mycompany.projetojdbc.ConexaoDB;
+import com.mycompany.projetojdbc.entities.Categoria;
 import com.mycompany.projetojdbc.entities.Filme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -65,9 +68,40 @@ public class FilmeDAO {
         }
         return null;    
 }
-    
-    
-    
-    
-    
+        /*  public List<Categoria> listarCategorias() throws SQLException {
+        String sql = "SELECT * FROM Categoria";
+        List<Categoria> categorias = new ArrayList<>();
+        try (Connection conn = ConexaoDB.getConnection(); 
+             PreparedStatement stmt = conn.prepareStatement(sql); 
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                categorias.add(new Categoria(rs.getInt("id"), rs.getString("nome")));
+            }
+        }
+        return categorias;*/
+        
+    /**
+     *
+     * @return uma lista de filmes
+     * @throws SQLException
+     */
+    public List<Filme> listarFilmes() throws SQLException {
+            String sql = "SELECT * FROM Filme";
+            List<Filme> filmes;
+             filmes = new ArrayList<>();
+            try (Connection conn = ConexaoDB.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs =  stmt.executeQuery()){
+                while (rs.next()){
+                    filmes.add(new Filme(rs.getInt("id"), rs.getString("nome")));
+                }
+            }
+    }
+        
+          
+        
+            
 }
+    
+      
+

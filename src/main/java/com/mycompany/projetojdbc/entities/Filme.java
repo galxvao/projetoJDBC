@@ -17,7 +17,7 @@ public class Filme {
     private int categoriaId;
     
 
-    public Filme() {
+    public Filme(int aInt, String string) {
     }
 
     public Filme(int id, String titulo, int ano, String diretor, int categoriaId) {
