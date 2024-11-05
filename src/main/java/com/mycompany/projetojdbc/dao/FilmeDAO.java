@@ -20,6 +20,7 @@ import java.sql.Statement;
 //Create 
 
 public class FilmeDAO {
+    
     public void inserirFilme(Filme filme) throws SQLException {
     String sql = "INSERT INTO Filme (titulo, ano, diretor, categoriaId) VALUES (?)";
     
@@ -46,6 +47,26 @@ public class FilmeDAO {
         }
     }
 }
+    
+        public Filme buscarFilmePorId(int id) throws SQLException {
+        String sql = "SELECT * FROM Filme WHERE id = ?";
+        try (Connection conn = ConexaoDB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Filme(
+                    rs.getInt("id"),
+                    rs.getString("titulo"),
+                    rs.getInt("ano"),
+                    rs.getString("diretor"),
+                    rs.getInt("categoriaId")
+                );
+            }
+        }
+        return null;    
+}
+    
+    
     
     
     
